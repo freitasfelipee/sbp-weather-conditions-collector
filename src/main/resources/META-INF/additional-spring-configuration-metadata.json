@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "sbp.config.directoryToBeRead",
+    "type": "java.lang.String",
+    "description": "A description for 'sbp.config.directoryToBeRead'"
+  },
+  {
+    "name": "sbp.config.cronjob.time",
+    "type": "java.lang.String",
+    "description": "A description for 'sbp.config.cronjob.time'"
+  }
+]}
