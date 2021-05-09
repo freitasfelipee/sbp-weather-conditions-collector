@@ -14,9 +14,12 @@ public class WeatherConditions {
 	private BigDecimal humidity;
 	private BigDecimal windChill;
 	private BigDecimal wind;
+	private String windDirection;
 	private BigDecimal thwIndex;
 	private BigDecimal barometer;
 	private BigDecimal heatIndex;
 	private BigDecimal todayRain;
 	private BigDecimal yearlyRain;
+	private String sunriseTime;
+	private String sunsetTime;
 }

@@ -9,7 +9,10 @@ import br.com.sbp.config.exception.ConvertWeatherConditionsFileException;
 import br.com.sbp.core.enums.WeatherConditionsEnum;
 import br.com.sbp.core.model.WeatherConditions;
 import br.com.sbp.core.utils.NormalizeDateTimeInformationUtils;
+import br.com.sbp.core.utils.NormalizeSunriseUtils;
+import br.com.sbp.core.utils.NormalizeSunsetUtils;
 import br.com.sbp.core.utils.NormalizeTableItemUtils;
+import br.com.sbp.core.utils.NormalizeWindDirectionUtils;
 import br.com.sbp.dataprovider.database.entity.WeatherConditionsDb;
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,8 +43,10 @@ public class WeatherConditionsAdapter {
 				if (count == WeatherConditionsEnum.WIND_CHILL.getLineNumber()) 
 					weatherConditions.setWindChill(new BigDecimal(NormalizeTableItemUtils.execute(line)));
 
-				if (count == WeatherConditionsEnum.WIND.getLineNumber()) 
+				if (count == WeatherConditionsEnum.WIND.getLineNumber()) {
 					weatherConditions.setWind(new BigDecimal(NormalizeTableItemUtils.execute(line)));
+					weatherConditions.setWindDirection(NormalizeWindDirectionUtils.execute(line));
+				}
 				
 				if (count == WeatherConditionsEnum.THW_INDEX.getLineNumber()) 
 					weatherConditions.setThwIndex(new BigDecimal(NormalizeTableItemUtils.execute(line)));
@@ -57,6 +62,11 @@ public class WeatherConditionsAdapter {
 				
 				if (count == WeatherConditionsEnum.YEARLY_RAIN.getLineNumber()) 
 					weatherConditions.setYearlyRain(new BigDecimal(NormalizeTableItemUtils.execute(line)));
+				
+				if (count == WeatherConditionsEnum.SUNRISE_SUNSET.getLineNumber()) {
+					weatherConditions.setSunriseTime(NormalizeSunriseUtils.execute(line));
+					weatherConditions.setSunsetTime(NormalizeSunsetUtils.execute(line));
+				}
 				
 				count++;
 			}
@@ -80,11 +90,14 @@ public class WeatherConditionsAdapter {
 									  .humidity(weatherConditions.getHumidity())
 									  .windChill(weatherConditions.getWindChill())
 									  .wind(weatherConditions.getWind())
+									  .windDirection(weatherConditions.getWindDirection())
 									  .thwIndex(weatherConditions.getThwIndex())
 									  .barometer(weatherConditions.getBarometer())
 									  .heatIndex(weatherConditions.getHeatIndex())
 									  .todayRain(weatherConditions.getTodayRain())
 									  .yearlyRain(weatherConditions.getYearlyRain())
+									  .sunriseTime(weatherConditions.getSunriseTime())
+									  .sunsetTime(weatherConditions.getSunsetTime())
 									 .build();
 		} catch (Exception e) {
 			log.error("Failed to convert weatherInfo to db object. Details: " + e.getLocalizedMessage()); 

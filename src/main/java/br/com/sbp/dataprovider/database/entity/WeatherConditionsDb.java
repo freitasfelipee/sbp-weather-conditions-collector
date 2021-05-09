@@ -6,13 +6,19 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Builder
-@Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "weather_condition")
 public class WeatherConditionsDb implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -36,6 +42,9 @@ public class WeatherConditionsDb implements Serializable {
 	@Column(name = "wind")
 	private BigDecimal wind;
 	
+	@Column(name = "wind_direction")
+	private String windDirection;
+	
 	@Column(name = "thw_index")
 	private BigDecimal thwIndex;
 	
@@ -50,4 +59,10 @@ public class WeatherConditionsDb implements Serializable {
 	
 	@Column(name = "yearly_rain")
 	private BigDecimal yearlyRain;
+	
+	@Column(name = "sunrise_time")
+	private String sunriseTime;
+	
+	@Column(name = "sunset_time")
+	private String sunsetTime;
 }

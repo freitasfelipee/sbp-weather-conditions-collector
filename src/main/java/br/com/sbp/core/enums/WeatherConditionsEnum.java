@@ -15,7 +15,8 @@ public enum WeatherConditionsEnum {
 	BAROMETER(38),
 	HEAT_INDEX(40),
 	TODAY_RAIN(44),
-	YEARLY_RAIN(46);
+	YEARLY_RAIN(46),
+	SUNRISE_SUNSET(50);
 	
 	private int lineNumber;
 	
